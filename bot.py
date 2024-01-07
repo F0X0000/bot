@@ -11,6 +11,7 @@ bot = discord.Bot()
 @bot.event
 async def on_ready():
     print(f"{bot.user} jest online!")
+    await bot.change_presence(status=discord.Status.idle, activity = discord.Activity(type=discord.ActivityType.listening, name="/help"))
 
 @bot.command(description="Wyświetla informacje o bocie.")
 async def help(ctx):
