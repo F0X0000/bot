@@ -4,6 +4,7 @@ import os
 from other import *
 from ping3 import ping as ping3_ping
 import datetime
+import time
 
 load_dotenv()
 bot = discord.Bot()
@@ -39,11 +40,21 @@ async def weekend(ctx):
         hours_until_weekend = 16 - now.hour
         minutes_until_weekend = 0 - now.minute
         time_until_weekend = datetime.timedelta(days=days_until_weekend, hours=hours_until_weekend, minutes=minutes_until_weekend)
-        await ctx.respond(f"Do weekendu pozostało: {time_until_weekend}")
+        weekend_start = now + time_until_weekend
+        weekend_start_timestamp = int(weekend_start.timestamp())
+        await ctx.respond(f"Do weekendu zostało: <t:{weekend_start_timestamp}:R>")
 
 @bot.command(name="poezja", description="Randomowy cytat z kanału #cytaty.")
 async def poezja(ctx):
     odpowiedz = losuj("other/cytaty.txt")
     await ctx.respond(odpowiedz)
+
+@bot.command(name="isitup", description="Pinguje podany adres/domenę.")
+async def isitup(ctx, adres):
+    odpowiedz = isItUp(adres)
+    if odpowiedz == True:
+        await ctx.respond(f":white_check_mark: Adres `{adres}` jest online!")
+    else:
+        await ctx.respond(f":bangbang: Adres `{adres}` jest offline!")
 
 bot.run(os.getenv('TOKEN'))
