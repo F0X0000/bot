@@ -1,12 +1,9 @@
-import yaml
 import discord
-import socket
 from dotenv import load_dotenv
 import os
 from other import *
 from ping3 import ping as ping3_ping
 import datetime
-import requests
 
 load_dotenv()
 bot = discord.Bot()
