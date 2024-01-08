@@ -8,7 +8,6 @@ import time
 
 load_dotenv()
 bot = discord.Bot()
-
 @bot.event
 async def on_ready():
     print(f"{bot.user} jest online!")
@@ -30,19 +29,19 @@ async def magiczna_kula(ctx, pytanie: discord.Option(str)):
 async def say(ctx, wiadomosc: discord.Option(str)):
     await ctx.respond(wiadomosc)
 
-@bot.command(name="weekend", description="Sprawdza czas do weekendu.")
-async def weekend(ctx):
-    now = datetime.datetime.now()
-    if now.weekday() == 4 and now.hour >= 16 or now.weekday() == 5 or now.weekday() == 6 or (now.weekday() == 0 and now.hour < 16):
-        await ctx.respond("Jest weekend! <:tada:1193546704729944084> ")
-    else:
-        days_until_weekend = (4 - now.weekday() + 7) % 7
-        hours_until_weekend = 16 - now.hour
-        minutes_until_weekend = 0 - now.minute
-        time_until_weekend = datetime.timedelta(days=days_until_weekend, hours=hours_until_weekend, minutes=minutes_until_weekend)
-        weekend_start = now + time_until_weekend
-        weekend_start_timestamp = int(weekend_start.timestamp())
-        await ctx.respond(f"Do weekendu zostało: <t:{weekend_start_timestamp}:R>")
+# @bot.command(name="weekend", description="Sprawdza czas do weekendu.")
+# async def weekend(ctx):
+#     now = datetime.datetime.now()
+#     if now.weekday() == 4 and now.hour >= 16 or now.weekday() == 5 or now.weekday() == 6 or (now.weekday() == 0 and now.hour < 16):
+#         await ctx.respond("Jest weekend! <:tada:1193546704729944084> ")
+#     else:
+#         days_until_weekend = (4 - now.weekday() + 7) % 7
+#         hours_until_weekend = 16 - now.hour
+#         minutes_until_weekend = 0 - now.minute
+#         time_until_weekend = datetime.timedelta(days=days_until_weekend, hours=hours_until_weekend, minutes=minutes_until_weekend)
+#         weekend_start = now + time_until_weekend
+#         weekend_start_timestamp = int(weekend_start.timestamp())
+#         await ctx.respond(f"Do weekendu zostało: <t:{weekend_start_timestamp}:R>")
 
 @bot.command(name="poezja", description="Randomowy cytat z kanału #cytaty.")
 async def poezja(ctx):
